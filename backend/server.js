@@ -19,6 +19,9 @@ mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost:27017/parkseva'
   console.log('❌ MongoDB connection error:', error);
 });
 
+// Import routes
+const authRoutes = require('./routes/auth');
+
 // Basic Routes
 app.get('/', (req, res) => {
   res.json({ 
@@ -27,6 +30,9 @@ app.get('/', (req, res) => {
     timestamp: new Date().toISOString()
   });
 });
+
+// API Routes
+app.use('/api/auth', authRoutes);
 
 // Health check route
 app.get('/health', (req, res) => {
